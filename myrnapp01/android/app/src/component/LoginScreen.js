@@ -8,6 +8,7 @@ import {
     StyleSheet
 
 } from 'react-native'
+
 export default class LoginScreen extends React.Component{
  constructor(){
      super()
@@ -25,8 +26,21 @@ export default class LoginScreen extends React.Component{
     this.setState({ upwd})
  }
  doLogin=()=>{
-     alert(this.state.uname + this.state.upwd)
+     //alert(this.state.uname+'\n' + this.state.upwd)
      //发送请求
+     let url="http://www.codeboy.com/data/user/login.php";
+     let options={
+        method:'POST',
+        body:`uname=${this.state.uname}&upwd=${this.state.upwd}`,
+        headers:{'Content-Type': 'application/x-www-form-urlencoded'}
+     }
+     //访问服务器端的API,发起异步请求
+     fetch(url,options).then((res)=>{
+         return res.json() //返回primary
+     }).then((data)=>{
+         console.log('得到服务器端响应主体')
+         console.log(data)
+     })
  }
  render(){
      return (
