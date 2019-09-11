@@ -16,7 +16,7 @@ export default class ProductDetailScreen extends React.Component{
      console.log(this.props.navigation)
      console.log(this.props.navigation.getParam('pid'))
      console.log(this.props.navigation.getParam('age'))
-     alert(this.props.navigation.getParam('pid'))
+     //alert(this.props.navigation.getParam('pid'))
  }
  render(){
      return (
