@@ -1,15 +1,19 @@
 import React from 'react'
 import {
     View,
+    Text,
+
 
 } from 'react-native'
 export default class ProductLiatScreen extends React.Component{
  constructor(){
      super()
  }
- rander(){
+ render(){
      return (
-         <View>这里是商品列表</View>
+         <View>
+             <Text>这里是商品列表</Text>
+         </View>
      )
  }
 }
