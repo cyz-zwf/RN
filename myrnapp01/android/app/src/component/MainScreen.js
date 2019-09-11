@@ -4,11 +4,15 @@ import {
     Text,
     StyleSheet,
     Image,
+    TouchableOpacity
 
 } from 'react-native'
 export default class MainScreen extends React.Component{
  constructor(){
      super()
+ }
+ _onpress= ()=>{
+     this.props.navigation.navigate('productList')
  }
  render(){
      return (
@@ -53,8 +57,10 @@ export default class MainScreen extends React.Component{
              {/* 主菜单 */}
              <View style={{flexDirection:'row'}}>
                  <View style={[ss.column,{borderBottomWidth:0,borderRightWidth:0}]}>
-                    <Image style={ss.icon} source={require('../assest/img/menu_product.jpg')} />
-                    <Text style={[ss.txtMiddle,ss.txtDefault]}>商品管理</Text>
+                     <TouchableOpacity onPress={this._onpress}>
+                        <Image style={ss.icon} source={require('../assest/img/menu_product.jpg')} />
+                        <Text style={[ss.txtMiddle,ss.txtDefault]}>商品管理</Text>
+                    </TouchableOpacity>
                  </View>
                  <View style={[ss.column,{borderBottomWidth:0,borderRightWidth:0}]}>
                     <Image  style={ss.icon} source={require("../assest/img/menu_user.jpg")} />
