@@ -3,9 +3,19 @@ import {
     View,
     Text,
     Button,
+    TouchableOpacity,
+    Image
 
 } from 'react-native'
 export default class ProductLiatScreen extends React.Component{
+    static navigationOptions = {
+        title:"商品列表",
+        headerRight:(
+            <TouchableOpacity>
+                <Image  style={{width:40 ,height:40,borderRadius:20}} source={require('../assest/img/user.png')}/>
+            </TouchableOpacity>
+        )
+    }
  constructor(){
      super()
  }

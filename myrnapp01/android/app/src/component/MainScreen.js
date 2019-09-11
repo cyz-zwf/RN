@@ -8,6 +8,14 @@ import {
 
 } from 'react-native'
 export default class MainScreen extends React.Component{
+    static navigationOptions = {
+        title:"主菜单",
+        headerRight:(
+            <TouchableOpacity>
+                <Image  style={{width:40 ,height:40,borderRadius:20}} source={require('../assest/img/user.png')}/>
+            </TouchableOpacity>
+        )
+    }
  constructor(){
      super()
  }

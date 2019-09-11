@@ -10,6 +10,9 @@ import {
 } from 'react-native'
 
 export default class LoginScreen extends React.Component{
+    static navigationOptions = { //设置页头 
+        title:'管理员登录'
+    } 
  constructor(){
      super()
      this.state= { 

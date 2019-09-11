@@ -5,6 +5,9 @@ import {
 } from 'react-native'
 
 export default class ProductDetailScreen extends React.Component{
+    static navigationOptions = { //设置页头 
+        title:'商品详情'
+    } 
  constructor(){
      super()
  }
