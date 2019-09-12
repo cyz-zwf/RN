@@ -7,6 +7,7 @@ import {
     Button
 } from 'react-native'
 import CarouselComponent from './CarouselComponent';
+import TransformComponent from './HTMLTransformerComponent';
 
 export default class ProductDetailScreen extends React.Component{
     static navigationOptions = { //设置页头 
@@ -41,7 +42,14 @@ export default class ProductDetailScreen extends React.Component{
              <ScrollView>
                 <Text style={ss.txt}>产品型号 : {this.state.product.lname}</Text>
                 <View style={ss.hr}></View>
+                {/* 轮播组件 */}
                 <CarouselComponent picList={this.state.product.picList}></CarouselComponent>
+                <Text style={{fontSize:24}}>{this.state.product.title}</Text>
+                <Text style={{marginVertical:10}}>{this.state.product.subtitle}</Text>
+                <Text style={{color:'#f00',fontSize:16}}> 价格:{this.state.product.price}</Text>
+                <View style={ss.hr}></View>
+                {/* HTML转换组件 */}
+                <TransformComponent html={this.state.product.details} />
              </ScrollView>
                 <Button title="添加到购物车"/>
          </View>
