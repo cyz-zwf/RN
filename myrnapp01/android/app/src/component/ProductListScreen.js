@@ -27,7 +27,11 @@ export default class ProductLiatScreen extends React.Component{
          plist:[] //商品列表
      }
     }
-    loadData(){//加载下一页的商品数据
+    loadData = ()=>{//加载下一页的商品数据
+        //如果已经没有更多数据可供加载了,就返回
+        if(!this.hasMore){
+            return ;
+        }
         this.pno++
         console.log('开始加载商品数据' ,this.pno)
         let url= "http://www.codeboy.com/data/product/list.php?pno="+this.pno
@@ -35,8 +39,12 @@ export default class ProductLiatScreen extends React.Component{
         fetch(url).then( (res)=>{
             return res.json()
         }).then( (body)=>{
+            //判断是否还有更多数据
+            if(this.pno>=body.pageCount){
+                this.hasMore = false
+            }
             //console.log(data)
-            console.log(body.data) 
+            console.log(body) 
             let plist=this.state.plist.concat(body.data)
             this.setState({
                 plist
@@ -63,32 +71,39 @@ export default class ProductLiatScreen extends React.Component{
              <Text numberOfLines={1} style={{fontSize:18}}>{p.title}</Text>
              <Text style={{color:'#f00',fontSize:16}}>价格:{p.price}</Text>
              </View>
-             <Button title="查看详情" style={{width:10}} onPress={ ()=>{this.props.navigation.navigate('productdetail',{pid: p.lid })}}/>
+             <Button  color="#f00" title="查看详情" style={{width:10,borderRadius:5,}} onPress={ ()=>{this.props.navigation.navigate('productdetail',{pid: p.lid })}}/>
          </View>
      )
  }
  _getSepor=()=>{
      return (
-         <View style={{height:0,borderTopWidth:1 , borderTopColor:"#73879c"}}></View>
+         <View style={{height:0,borderTopWidth:1 , borderTopColor:"#73879c"  ,padding:10}}></View>
      )
  }
  _getFooter=()=>{
     return (
         <View >
-            <ActivityIndicator size="large" />
-            <Text style={{textAlign:"center"}}>加载中...</Text>
+            {/* React中的条件渲染 */}
+            {
+                (function (){
+                    if(this.hasMore){
+                        return <ActivityIndicator size="large" />
+                    }
+                })()
+            }
+            <Text style={{textAlign:"center"}}>{this.hasMore?"加载中...":"没有更多数据了"}</Text>
         </View>
     )
  }
  render(){
      return (
-         <View>
+         <View style={{padding:15}}>
              {/* <Text>这里是商品列表</Text>
              <Button title="查看详情-10" onPress={ ()=>{this.jumpToProductDetail(10)} }/>
              <Button title="查看详情-15" onPress={ ()=>{this.jumpToProductDetail(15)} }/>
              <Button title="查看详情-20" onPress={ ()=>{this.jumpToProductDetail(20)} }/> */}
              <FlatList data ={this.state.plist} renderItem={this._renderItem} 
-             keyExtractor={(item,index)=>{item.lid}} ItemSeparatorComponent={this._getSepor} ListFooterComponent={this._getFooter}/>
+             keyExtractor={(item,index)=>index+'-'+item.lid} ItemSeparatorComponent={this._getSepor} ListFooterComponent={this._getFooter} onEndReachedThreshold={0.1} onEndReached={this.loadData}/>
          </View>
      )
  }
