@@ -11,9 +11,9 @@ import ProductDetailScreen from './android/app/src/component/ProductDetailScreen
 
 //创建路由器.导航器
 let router = createStackNavigator({
+  productList:ProductLiatScreen,
   login:LoginScreen,
   main:MainScreen,
-  productList:ProductLiatScreen,
   productdetail:ProductDetailScreen,
 })
 
